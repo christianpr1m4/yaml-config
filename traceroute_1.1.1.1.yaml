@@ -1,0 +1,14 @@
+- name: Traceroute dari Juniper ke 1.1.1.1
+  hosts: JUNIPER
+  gather_facts: no
+
+  tasks:
+    - name: Jalankan traceroute
+      junipernetworks.junos.junos_command:
+        commands:
+          - traceroute 1.1.1.1
+      register: tr_result
+
+    - name: Tampilkan hasil traceroute
+      debug:
+        var: tr_result.stdout_lines
